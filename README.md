@@ -127,13 +127,6 @@ VBoxManage modifyvm $VM --memory 8192 --vram 128
 _You can define the virtual RAM (memory) and video ram (vram) size according to your needs._
 
 
-**Specify the Unattended Installation parameters, and then install the OS.**
-
-_Specify an Operating System ISO as the installation ISO. Specifiy a user name, full name, and password for a default user on the guest OS.
-Specify that you want to install the VirtualBox Guest Additions on the VM. Sets the time zone for the guest OS to Central European Time (CET)._
-``` Bash
-VBoxManage unattended install $VM --iso=$ISO --user=<login> --full-user-name=<name> --user-password <password> --install-additions --time-zone=CET
-```
 
 ### 7. Start the virtual machine.
 
