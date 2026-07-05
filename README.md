@@ -105,6 +105,7 @@ Allocate 8192 MB of RAM (8GB) and 128 MB of video RAM to the VM.
 ```
 VBoxManage modifyvm $VM --memory 8192 --vram 128
 ```
+_You can define the virtual RAM (memory) and video ram (vram) size according to your needs._
 
 ### 7. Specify the Unattended Installation parameters, and then install the OS.
 
