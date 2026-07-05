@@ -15,10 +15,7 @@ Debian OS (CD - without netsinst image) : __https://cdimage.debian.org/debian-cd
 
 Source : _User Manual Virtual Box_.
 
-The following example uses various VBoxManage commands to specify the VM and configure an
-unattended guest installation for an Oracle Linux VM on a Linux host
-It then shows the use of the VBoxManage unattended install command to install and configure the
-guest OS.
+***The following example uses various VBoxManage commands to specify the VM and configure an unattended guest installation for an OS on a Mac host. It then shows the use of the VBoxManage unattended install command to install and configure the guest OS.***
 
 ### 1. Set a variable for the name of the OS.
 ```
