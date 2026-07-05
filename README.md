@@ -19,14 +19,14 @@ Source : _User Manual Virtual Box_.
 ***The following example uses various VBoxManage commands to specify the VM and configure an unattended guest installation for an OS on a Mac host. It then shows the use of the VBoxManage unattended install command to install and configure the guest OS.***
 
 ### 1. Set a variable for the name of the OS.
-```
+``` bash
 VM=<vm name>
 ```
 
 ### 2. Select an OS type.
    
 List the available guest OS types.
-```
+``` bash
 VBoxManage list ostypes
 ```
 Note the exact ID of the one you need. This is required
@@ -40,13 +40,13 @@ Family:           Linux / Debian (Linux)
 
 Architecture:     ARMv8 (64-bit)
 
-```
+``` bash
 OS=<ostype ID>
 ```
 
 ### 3. Create the virtual machine.
 
-```
+``` bash
 VBoxManage createvm --name $VM --ostype $OS --register
 ```
 The VM has a unique UUID. An XML settings file is generated.
@@ -56,42 +56,54 @@ The VM has a unique UUID. An XML settings file is generated.
    
    _You can define the virtual hard disk size according to your needs._
    
-```
+``` bash
 VBoxManage createhd --filename /VirtualBox/$VM/$VM.vdi --size 32768
 ```
 
 ### 5. Create storage devices for the VM.
    
-Create a SATA storage controller and attach the virtual hard disk.
+Create a VirtIO SCSI controller and attach the virtual hard disk. (This is good practice for Arm64 Architecture)
 
-```
-VBoxManage storagectl $VM --name "SATA Controller" --add sata --controller IntelAHCI
-```
-
-```
-VBoxManage storageattach $VM --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium /VirtualBox/$VM/$VM.vdi
-```
-
-### 6. Create an IDE storage controller for a virtual DVD drive and attach an ISO file (OS).
-
-_You can also rattach the virtual DVD drive to SATA Controller port 1_
-
-```
-VBoxManage storagectl $VM --name "IDE Controller" --add ide
+``` Bash
+VBoxManage storagectl "$VM" \
+  --name "VirtIO SCSI" \
+  --add scsi \
+  --controller VirtIO \
+  --portcount 2 \
+  --bootable on
 ```
 
-**add path to ISO image**
+``` Bash
+VBoxManage storageattach "$VM" \
+  --storagectl "VirtIO SCSI" \
+  --port 0 \
+  --device 0 \
+  --type hdd \
+  --medium "$VDI"
 ```
+
+### 6. Rattach the virtual DVD drive to VirtIO, link the ISO file (OS).
+
+
+**add path to ISO image.**
+``` Bash
 ISO=<PATH .iso>
 ```
 
-**attach the .iso to the virtuak DVD drive**
-```
-VBoxManage storageattach $VM --storagectl "IDE Controller" --port 0 --device 0 --type dvddrive --medium $ISO
+**Attach the .iso to the virtuak DVD drive.**
+``` Bash
+VBoxManage storageattach "$VM" \
+  --storagectl "VirtIO SCSI" \
+  --port 1 \
+  --device 0 \
+  --type dvddrive \
+  --medium "$ISO"
 ```
 
 
 ### On Apple Silicon / ARM host, VirtualBox supports VMSVGA only as the graphics controller.
+
+**Change the graphics controller**
 ```
 VBoxManage modifyvm "$VM" --graphicscontroller vmsvga
 ```
