@@ -14,4 +14,5 @@ Debian OS (CD - without netsinst image) : __https://cdimage.debian.org/debian-cd
 ## Instruction 
 
 Then delete both the VM registration and its virtual disk/configuration files:
+
 ```VBoxManage unregistervm "$VM" --delete```
