@@ -8,7 +8,7 @@ Note : It does not apply to Intel Macs or x86/x86_64 guest operating systems.
 
 ## Ressources 
 
-User Manual Virtual Box  : __https://download.virtualbox.org/virtualbox/7.2.12/UserManual.pdf__
+Oracle VirtualBox User Manual  : __https://download.virtualbox.org/virtualbox/7.2.12/UserManual.pdf__
 
 Rocky Linux Source code  : __https://dl.rockylinux.org__
 
