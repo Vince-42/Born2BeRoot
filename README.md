@@ -1,7 +1,10 @@
 # Born2BeRoot
 
-Virtual Machine on Mac.
+## Creating an ARM64 virtual machine with VirtualBox on an Apple Silicon Mac
 
+This guide applies to Apple Silicon Macs using VirtualBox 7.2 and ARM64/AArch64 guest operating systems.
+
+It does not apply to Intel Macs or x86/x86_64 guest operating systems.
 
 ## Ressources 
 
@@ -14,7 +17,7 @@ Debian OS (CD - without netsinst image) : __https://cdimage.debian.org/debian-cd
 
 ## Instruction 
 
-Source : _User Manual Virtual Box_.
+Source : _adapted from the Oracle VirtualBox User Manual._
 
 
 ***The following example uses various VBoxManage commands to create a VM on a Mac OS.***
