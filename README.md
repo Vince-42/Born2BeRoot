@@ -26,7 +26,7 @@ VM=<vm name>
 ### 2. Select an OS type.
    
 List the available guest OS types.
-``` bash
+``` Bash
 VBoxManage list ostypes
 ```
 Note the exact ID of the one you need. This is required
@@ -40,13 +40,13 @@ Family:           Linux / Debian (Linux)
 
 Architecture:     ARMv8 (64-bit)
 
-``` bash
+``` Bash
 OS=<ostype ID>
 ```
 
 ### 3. Create the virtual machine.
 
-``` bash
+``` Bash
 VBoxManage createvm --name $VM --ostype $OS --register
 ```
 The VM has a unique UUID. An XML settings file is generated.
@@ -104,24 +104,24 @@ VBoxManage storageattach "$VM" \
 ### On Apple Silicon / ARM host, VirtualBox supports VMSVGA only as the graphics controller.
 
 **Change the graphics controller**
-```
+``` Bash
 VBoxManage modifyvm "$VM" --graphicscontroller vmsvga
 ```
 
 ### Optional Configuration
 
 **Enable I/O APIC for the motherboard of the VM.**
-```
+``` Bash
 VBoxManage modifyvm $VM --ioapic on
 ```
 
 **Configure the boot device order for the VM.**
-```
+``` Bash
 VBoxManage modifyvm $VM --boot1 dvd --boot2 disk --boot3 none --boot4 none
 ```
 
 **Allocate 8192 MB of RAM (8GB) and 128 MB of video RAM to the VM.**
-```
+``` Bash
 VBoxManage modifyvm $VM --memory 8192 --vram 128
 ```
 _You can define the virtual RAM (memory) and video ram (vram) size according to your needs._
@@ -131,40 +131,40 @@ _You can define the virtual RAM (memory) and video ram (vram) size according to 
 
 _Specify an Operating System ISO as the installation ISO. Specifiy a user name, full name, and password for a default user on the guest OS.
 Specify that you want to install the VirtualBox Guest Additions on the VM. Sets the time zone for the guest OS to Central European Time (CET)._
-```
+``` Bash
 VBoxManage unattended install $VM --iso=$ISO --user=<login> --full-user-name=<name> --user-password <password> --install-additions --time-zone=CET
 ```
 
 ### 7. Start the virtual machine.
 
 The VM starts in headless mode, which means that it does not have a GUI.
-```
+``` Bash
 VBoxManage startvm $VM --type headless
 ```
 
 ### General Instruction
 
 **Show specific information on the VM.**
-```
+``` Bash
 VBoxManage showvminfo "$VM" | grep -E "Memory size|Number of CPUs|CPU exec cap|Firmware|Graphic|Boot Device|State|Pointing Device|OHCI USB|EHCI USB|xHCI USB"
 ```
 
 **Allow control from keyboard from the VM.**
-```
+``` Bash
 VBoxManage modifyvm "$VM" --usb-xhci on --keyboard usb --mouse usbtablet
 ```
 
 **You can also start the vm with a GUI.**
-```
+``` Bash
 VBoxManage startvm "$VM" --type gui
 ```
 
 **List all registered VM on the hardware.**
-```
+``` Bash
 VBoxManage list vms
 ```
 
 **To delete both the VM registration and its virtual disk/configuration files.**
-```
+``` Bash
 VBoxManage unregistervm "$VM" --delete
 ```
