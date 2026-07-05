@@ -80,7 +80,7 @@ VBoxManage createhd --filename "$VDI" --size 32768
 
 ### 5. Create storage devices for the VM.
    
-Create a VirtIO SCSI controller and attach the virtual hard disk. (This is good practice for Arm64 Architecture)
+Create a VirtIO SCSI controller and attach the virtual hard disk. (This is required for Arm64 Architecture)
 
 ``` Bash
 VBoxManage storagectl "$VM" \
@@ -100,7 +100,7 @@ VBoxManage storageattach "$VM" \
   --medium "$VDI"
 ```
 
-### 6. Rattach the virtual DVD drive to VirtIO, link the ISO file (OS).
+### 6. Attach the virtual DVD drive to VirtIO, link the ISO file (OS).
 
 
 **add path to ISO image.**
@@ -108,7 +108,7 @@ VBoxManage storageattach "$VM" \
 ISO="PATH .iso"
 ```
 
-**Attach the .iso to the virtuak DVD drive.**
+**Attach the .iso to the virtual DVD drive.**
 ``` Bash
 VBoxManage storageattach "$VM" \
   --storagectl "VirtIO SCSI" \
@@ -135,7 +135,7 @@ VBoxManage modifyvm "$VM" --boot1 dvd --boot2 disk --boot3 none --boot4 none
 
 **Allocate 4096 MB of RAM (4GB), 128 MB of video RAM & 2 CPUs to the VM.**
 ``` Bash
-VBoxManage modifyvm "$VM" --memory 8192 --vram 128 --cpus 2
+VBoxManage modifyvm "$VM" --memory 4096 --vram 128 --cpus 2
 ```
 _You can define the virtual RAM (memory), video ram (vram) size and CPUs according to your needs._
 
@@ -168,6 +168,20 @@ VBoxManage startvm "$VM" --type headless
 **List all registered VM on the hardware.**
 ``` Bash
 VBoxManage list vms
+```
+
+### Shutdown and troubleshooting
+
+***The VM must be powered off before deletion.***
+
+**Safe shutdown from the Mac host**
+``` Bash
+VBoxManage controlvm "$VM" acpipowerbutton
+```
+
+**Startup-troubleshooting command**
+``` Bash
+VBoxManage showvminfo "$VM" --log 0 | tail -n 80
 ```
 
 **To delete both the VM registration and its virtual disk/configuration files.**
