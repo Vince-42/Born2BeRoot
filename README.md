@@ -137,18 +137,22 @@ VBoxManage startvm $VM --type headless
 VBoxManage showvminfo "$VM" | grep -E "Memory size|Number of CPUs|CPU exec cap|Firmware|Graphic|Boot Device|State|Pointing Device|OHCI USB|EHCI USB|xHCI USB"
 ```
 
-**Allow control from keyboard from the VM**
+**Allow control from keyboard from the VM.**
 ```
 VBoxManage modifyvm "$VM" --usb-xhci on --keyboard usb --mouse usbtablet
 ```
 
-**You can also start the vm with a gui.**
+**You can also start the vm with a GUI.**
 ```
 VBoxManage startvm "$VM" --type gui
 ```
 
+**List all registered VM on the hardware.**
+```
+VBoxManage list vms
+```
 
-**To delete both the VM registration and its virtual disk/configuration files**
+**To delete both the VM registration and its virtual disk/configuration files.**
 ```
 VBoxManage unregistervm "$VM" --delete
 ```
