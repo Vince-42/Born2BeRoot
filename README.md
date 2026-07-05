@@ -130,17 +130,17 @@ VBoxManage modifyvm $VM --graphicscontroller vmsvga
 VBoxManage modifyvm $VM --boot1 dvd --boot2 disk --boot3 none --boot4 none
 ```
 
-**Allocate 8192 MB of RAM (8GB) and 128 MB of video RAM to the VM.**
+**Allocate 4096 MB of RAM (4GB), 128 MB of video RAM & 2 CPUs to the VM.**
 ``` Bash
-VBoxManage modifyvm $VM --memory 8192 --vram 128
+VBoxManage modifyvm $VM --memory 8192 --vram 128 --cpus 2
 ```
-_You can define the virtual RAM (memory) and video ram (vram) size according to your needs._
+_You can define the virtual RAM (memory), video ram (vram) size and CPUs according to your needs._
 
 
 
 ### 7. Start the virtual machine.
 
-The VM starts in headless mode, which means that it does not have a GUI.
+The VM starts in GUI mode, you can also start in --headless mode, see instruction below.
 ``` Bash
 VBoxManage startvm $VM --type gui
 ```
