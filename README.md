@@ -98,32 +98,32 @@ VBoxManage modifyvm "$VM" --graphicscontroller vmsvga
 
 ### Optional Configuration
 
-Enable I/O APIC for the motherboard of the VM.
+**Enable I/O APIC for the motherboard of the VM.**
 ```
 VBoxManage modifyvm $VM --ioapic on
 ```
 
-Configure the boot device order for the VM.
+**Configure the boot device order for the VM.**
 ```
 VBoxManage modifyvm $VM --boot1 dvd --boot2 disk --boot3 none --boot4 none
 ```
 
-Allocate 8192 MB of RAM (8GB) and 128 MB of video RAM to the VM.
+**Allocate 8192 MB of RAM (8GB) and 128 MB of video RAM to the VM.**
 ```
 VBoxManage modifyvm $VM --memory 8192 --vram 128
 ```
 _You can define the virtual RAM (memory) and video ram (vram) size according to your needs._
 
-### 7. Specify the Unattended Installation parameters, and then install the OS.
 
-Specify an Operating System ISO as the installation ISO. Specifiy a user name, full name, and password for a default user on the guest OS.
-Specify that you want to install the VirtualBox Guest Additions on the VM. Sets the time zone for the guest OS to Central European Time (CET).
+**Specify the Unattended Installation parameters, and then install the OS.**
 
+_Specify an Operating System ISO as the installation ISO. Specifiy a user name, full name, and password for a default user on the guest OS.
+Specify that you want to install the VirtualBox Guest Additions on the VM. Sets the time zone for the guest OS to Central European Time (CET)._
 ```
 VBoxManage unattended install $VM --iso=$ISO --user=<login> --full-user-name=<name> --user-password <password> --install-additions --time-zone=CET
 ```
 
-### 8. Start the virtual machine.
+### 7. Start the virtual machine.
 
 The VM starts in headless mode, which means that it does not have a GUI.
 ```
