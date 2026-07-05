@@ -19,9 +19,18 @@ Source : _User Manual Virtual Box_.
 
 ***The following example uses various VBoxManage commands to create a VM on a Mac OS.***
 
-### 1. Set a variable for the name of the OS.
+### 1. Set a variable for the VM.
+
+**Virtual Machine Name.**
 ``` bash
 VM="vm name"
+```
+
+**Base Directory & VDI Path.**
+```
+BASE_DIR="$HOME/VirtualBox VMs"
+VM_DIR="$BASE_DIR/$VM"
+VDI="$VM_DIR/$VM.vdi"
 ```
 
 ### 2. Select an OS type.
@@ -47,8 +56,13 @@ OS="ostype ID"
 
 ### 3. Create the virtual machine.
 
+
 ``` Bash
-VBoxManage createvm --name $VM --ostype $OS --register
+VBoxManage createvm \
+  --name "$VM" \
+  --ostype "$OS" \
+  --basefolder "$BASE_DIR" \
+  --register
 ```
 The VM has a unique UUID. An XML settings file is generated.
 
@@ -58,7 +72,7 @@ The VM has a unique UUID. An XML settings file is generated.
    _You can define the virtual hard disk size according to your needs._
    
 ``` bash
-VBoxManage createhd --filename $HOME/VirtualBox/$VM/$VM.vdi --size 32768
+VBoxManage createhd --filename $VDI --size 32768
 ```
 
 ### 5. Create storage devices for the VM.
