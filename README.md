@@ -21,6 +21,7 @@ VBoxManage showvminfo "$VM" | grep -E "Memory size|Number of CPUs|CPU exec cap|F
 ```
 
 
+
 ***The following example uses various VBoxManage commands to specify the VM and configure an unattended guest installation for an OS on a Mac host. It then shows the use of the VBoxManage unattended install command to install and configure the guest OS.***
 
 ### 1. Set a variable for the name of the OS.
