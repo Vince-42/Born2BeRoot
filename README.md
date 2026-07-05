@@ -10,7 +10,9 @@ It does not apply to Intel Macs or x86/x86_64 guest operating systems.
 
 User Manual Virtual Box : __https://download.virtualbox.org/virtualbox/7.2.12/UserManual.pdf__
 
-Rocky Linux : __https://dl.rockylinux.org__
+Rocky Linux Source code : __https://dl.rockylinux.org__
+
+Rocky Linux ISO download : __https://rockylinux.org/sr-SP/download__
 
 Debian OS (CD - without netsinst image) : __https://cdimage.debian.org/debian-cd/current/arm64/iso-cd/__
 
