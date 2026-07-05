@@ -12,7 +12,7 @@ User Manual Virtual Box  : __https://download.virtualbox.org/virtualbox/7.2.12/U
 
 Rocky Linux Source code  : __https://dl.rockylinux.org__
 
-Rocky Linux ISO download : __https://rockylinux.org/sr-SP/download__
+Rocky Linux OS download : __https://rockylinux.org/sr-SP/download__
 
 Debian OS (Minimal)      : __https://cdimage.debian.org/debian-cd/current/arm64/iso-cd/__
 
