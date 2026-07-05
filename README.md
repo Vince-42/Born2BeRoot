@@ -15,12 +15,6 @@ Debian OS (CD - without netsinst image) : __https://cdimage.debian.org/debian-cd
 
 Source : _User Manual Virtual Box_.
 
-**Show specific information on the VM.**
-```
-VBoxManage showvminfo "$VM" | grep -E "Memory size|Number of CPUs|CPU exec cap|Firmware|Graphic|Boot Device|State|Pointing Device|OHCI USB|EHCI USB|xHCI USB"
-```
-
-
 
 ***The following example uses various VBoxManage commands to specify the VM and configure an unattended guest installation for an OS on a Mac host. It then shows the use of the VBoxManage unattended install command to install and configure the guest OS.***
 
@@ -136,13 +130,25 @@ The VM starts in headless mode, which means that it does not have a GUI.
 VBoxManage startvm $VM --type headless
 ```
 
-You can also start the vm with a gui.
+### General Instruction
+
+**Show specific information on the VM.**
+```
+VBoxManage showvminfo "$VM" | grep -E "Memory size|Number of CPUs|CPU exec cap|Firmware|Graphic|Boot Device|State|Pointing Device|OHCI USB|EHCI USB|xHCI USB"
+```
+
+**Allow control from keyboard from the VM**
+```
+VBoxManage modifyvm "$VM" --usb-xhci on --keyboard usb --mouse usbtablet
+```
+
+**You can also start the vm with a gui.**
 ```
 VBoxManage startvm "$VM" --type gui
 ```
 
 
-To delete both the VM registration and its virtual disk/configuration files
+**To delete both the VM registration and its virtual disk/configuration files**
 ```
 VBoxManage unregistervm "$VM" --delete
 ```
