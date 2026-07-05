@@ -14,11 +14,11 @@ Rocky Linux Source code  : __https://dl.rockylinux.org__
 
 Rocky Linux OS download : __https://rockylinux.org/sr-SP/download__
 
+Rocky firewalld docs   : __https://docs.rockylinux.org/10/de/guides/security/firewalld-beginners/__
+
 Debian OS (Minimal)      : __https://cdimage.debian.org/debian-cd/current/arm64/iso-cd/__
 
 Debian OS (Full - DVD)   : __https://cdimage.debian.org/debian-cd/current/arm64/iso-dvd/__
-
-firewalld for Beginners   : __https://docs.rockylinux.org/10/de/guides/security/firewalld-beginners/__
 
 
 ## Instruction 
