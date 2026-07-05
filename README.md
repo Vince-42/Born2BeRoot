@@ -96,6 +96,12 @@ ISO=<PATH .iso>
 VBoxManage storageattach $VM --storagectl "IDE Controller" --port 0 --device 0 --type dvddrive --medium $ISO
 ```
 
+
+### On Apple Silicon / ARM host, VirtualBox supports VMSVGA only as the graphics controller.
+```
+VBoxManage modifyvm "$VM" --graphicscontroller vmsvga
+```
+
 ### Optional Configuration
 
 Enable I/O APIC for the motherboard of the VM.
