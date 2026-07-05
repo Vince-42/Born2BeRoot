@@ -72,7 +72,7 @@ The VM has a unique UUID. An XML settings file is generated.
    _You can define the virtual hard disk size according to your needs._
    
 ``` bash
-VBoxManage createhd --filename $VDI --size 32768
+VBoxManage createhd --filename "$VDI" --size 32768
 ```
 
 ### 5. Create storage devices for the VM.
@@ -80,7 +80,7 @@ VBoxManage createhd --filename $VDI --size 32768
 Create a VirtIO SCSI controller and attach the virtual hard disk. (This is good practice for Arm64 Architecture)
 
 ``` Bash
-VBoxManage storagectl $VM \
+VBoxManage storagectl "$VM" \
   --name "VirtIO SCSI" \
   --add scsi \
   --controller VirtIO \
@@ -89,7 +89,7 @@ VBoxManage storagectl $VM \
 ```
 
 ``` Bash
-VBoxManage storageattach $VM \
+VBoxManage storageattach "$VM" \
   --storagectl "VirtIO SCSI" \
   --port 0 \
   --device 0 \
@@ -107,7 +107,7 @@ ISO="PATH .iso"
 
 **Attach the .iso to the virtuak DVD drive.**
 ``` Bash
-VBoxManage storageattach $VM \
+VBoxManage storageattach "$VM" \
   --storagectl "VirtIO SCSI" \
   --port 1 \
   --device 0 \
@@ -120,19 +120,19 @@ VBoxManage storageattach $VM \
 
 **Change the graphics controller**
 ``` Bash
-VBoxManage modifyvm $VM --graphicscontroller vmsvga
+VBoxManage modifyvm "$VM" --graphicscontroller vmsvga
 ```
 
 ### Optional Configuration
 
 **Configure the boot device order for the VM.**
 ``` Bash
-VBoxManage modifyvm $VM --boot1 dvd --boot2 disk --boot3 none --boot4 none
+VBoxManage modifyvm "$VM" --boot1 dvd --boot2 disk --boot3 none --boot4 none
 ```
 
 **Allocate 4096 MB of RAM (4GB), 128 MB of video RAM & 2 CPUs to the VM.**
 ``` Bash
-VBoxManage modifyvm $VM --memory 8192 --vram 128 --cpus 2
+VBoxManage modifyvm "$VM" --memory 8192 --vram 128 --cpus 2
 ```
 _You can define the virtual RAM (memory), video ram (vram) size and CPUs according to your needs._
 
@@ -142,24 +142,24 @@ _You can define the virtual RAM (memory), video ram (vram) size and CPUs accordi
 
 The VM starts in GUI mode, you can also start in --headless mode, see instruction below.
 ``` Bash
-VBoxManage startvm $VM --type gui
+VBoxManage startvm "$VM" --type gui
 ```
 
 ### General Instruction
 
 **Show specific information on the VM.**
 ``` Bash
-VBoxManage showvminfo $VM | grep -E "Memory size|Number of CPUs|CPU exec cap|Firmware|Graphic|Boot Device|State|Pointing Device|OHCI USB|EHCI USB|xHCI USB"
+VBoxManage showvminfo "$VM" | grep -E "Memory size|Number of CPUs|CPU exec cap|Firmware|Graphic|Boot Device|State|Pointing Device|OHCI USB|EHCI USB|xHCI USB"
 ```
 
 **Use a virtual USB keyboard and USB tablet if guest input is unreliable**
 ``` Bash
-VBoxManage modifyvm $VM --usb-xhci on --keyboard usb --mouse usbtablet
+VBoxManage modifyvm "$VM" --usb-xhci on --keyboard usb --mouse usbtablet
 ```
 
 **You can also start the vm headless (no GUI).**
 ``` Bash
-VBoxManage startvm $VM --type headless
+VBoxManage startvm "$VM" --type headless
 ```
 
 **List all registered VM on the hardware.**
@@ -169,5 +169,5 @@ VBoxManage list vms
 
 **To delete both the VM registration and its virtual disk/configuration files.**
 ``` Bash
-VBoxManage unregistervm $VM --delete
+VBoxManage unregistervm "$VM" --delete
 ```
