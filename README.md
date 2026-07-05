@@ -74,8 +74,7 @@ VBoxManage storagectl $VM --name "SATA Controller" --add sata --controller Intel
 VBoxManage storageattach $VM --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium /VirtualBox/$VM/$VM.vdi
 ```
 
-### 6. Create an IDE storage controller for a virtual DVD drive and attach an Oracle Linux
-installation ISO.
+### 6. Create an IDE storage controller for a virtual DVD drive and attach an ISO file (OS).
 
 _You can also rattach the virtual DVD drive to SATA Controller port 1_
 
@@ -83,8 +82,14 @@ _You can also rattach the virtual DVD drive to SATA Controller port 1_
 VBoxManage storagectl $VM --name "IDE Controller" --add ide
 ```
 
+**add path to ISO image**
 ```
-VBoxManage storageattach $VM --storagectl "IDE Controller" --port 0 --device 0 --type dvddrive --medium /u01/Software/OL/OracleLinux-R7-U6-Server-x86_64-dvd.iso
+ISO=<PATH .iso>
+```
+
+**attach the .iso to the virtuak DVD drive**
+```
+VBoxManage storageattach $VM --storagectl "IDE Controller" --port 0 --device 0 --type dvddrive --medium $ISO
 ```
 
 ### Optional Configuration
@@ -106,24 +111,27 @@ VBoxManage modifyvm $VM --memory 8192 --vram 128
 
 ### 7. Specify the Unattended Installation parameters, and then install the OS.
 
-Specify an Oracle Linux ISO as the installation ISO. Specifiy a user name, full name, and password for a default user on the guest OS. Specifiy a user name, full name, and password for a default user on the guest OS.
+Specify an Operating System ISO as the installation ISO. Specifiy a user name, full name, and password for a default user on the guest OS.
+Specify that you want to install the VirtualBox Guest Additions on the VM. Sets the time zone for the guest OS to Central European Time (CET).
 
 ```
-# VBoxManage unattended install $VM --iso=/u01/Software/OL/OracleLinux-R7-U6-Server-x86_64-dvd.iso --user=login --full-user-name=name --user-password password \
+VBoxManage unattended install $VM --iso=$ISO --user=<login> --full-user-name=<name> --user-password <password> --install-additions --time-zone=CET
+```
 
-• Specify that you want to install the VirtualBox Guest Additions on the VM.
-49
-User Guide for Release 7.2
---install-additions \
-• Sets the time zone for the guest OS to Central European Time (CET).
---time-zone=CET
-8. Start the virtual machine.
-# VBoxManage startvm $VM --type headless
+### 8. Start the virtual machine.
+
 The VM starts in headless mode, which means that it does not have a GUI.
+```
+VBoxManage startvm $VM --type headless
+```
+
+You can also start the vm with a gui.
+```
+VBoxManage startvm "$VM" --type gui
+```
 
 
-Delete both the VM registration and its virtual disk/configuration files
-
+To delete both the VM registration and its virtual disk/configuration files
 ```
 VBoxManage unregistervm "$VM" --delete
 ```
