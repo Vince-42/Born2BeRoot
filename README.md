@@ -18,6 +18,8 @@ Debian OS (Minimal)      : __https://cdimage.debian.org/debian-cd/current/arm64/
 
 Debian OS (Full - DVD)   : __https://cdimage.debian.org/debian-cd/current/arm64/iso-dvd/__
 
+firewalld for Beginners   : __https://docs.rockylinux.org/10/de/guides/security/firewalld-beginners/__
+
 
 ## Instruction 
 
