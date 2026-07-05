@@ -1,5 +1,6 @@
 # Born2BeRoot
-Virtual Machine
+
+Virtual Machine on Mac.
 
 
 ## Ressources 
