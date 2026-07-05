@@ -110,11 +110,6 @@ VBoxManage modifyvm "$VM" --graphicscontroller vmsvga
 
 ### Optional Configuration
 
-**Enable I/O APIC for the motherboard of the VM.**
-``` Bash
-VBoxManage modifyvm $VM --ioapic on
-```
-
 **Configure the boot device order for the VM.**
 ``` Bash
 VBoxManage modifyvm $VM --boot1 dvd --boot2 disk --boot3 none --boot4 none
