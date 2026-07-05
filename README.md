@@ -65,7 +65,7 @@ VBoxManage createhd --filename $HOME/VirtualBox/$VM/$VM.vdi --size 32768
 Create a VirtIO SCSI controller and attach the virtual hard disk. (This is good practice for Arm64 Architecture)
 
 ``` Bash
-VBoxManage storagectl "$VM" \
+VBoxManage storagectl $VM \
   --name "VirtIO SCSI" \
   --add scsi \
   --controller VirtIO \
@@ -74,7 +74,7 @@ VBoxManage storagectl "$VM" \
 ```
 
 ``` Bash
-VBoxManage storageattach "$VM" \
+VBoxManage storageattach $VM \
   --storagectl "VirtIO SCSI" \
   --port 0 \
   --device 0 \
@@ -92,7 +92,7 @@ ISO="PATH .iso"
 
 **Attach the .iso to the virtuak DVD drive.**
 ``` Bash
-VBoxManage storageattach "$VM" \
+VBoxManage storageattach $VM \
   --storagectl "VirtIO SCSI" \
   --port 1 \
   --device 0 \
