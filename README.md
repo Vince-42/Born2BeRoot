@@ -20,7 +20,7 @@ Source : _User Manual Virtual Box_.
 
 ### 1. Set a variable for the name of the OS.
 ``` bash
-VM=<vm name>
+VM="vm name"
 ```
 
 ### 2. Select an OS type.
@@ -41,7 +41,7 @@ Family:           Linux / Debian (Linux)
 Architecture:     ARMv8 (64-bit)
 
 ``` Bash
-OS=<ostype ID>
+OS="ostype ID"
 ```
 
 ### 3. Create the virtual machine.
@@ -57,7 +57,7 @@ The VM has a unique UUID. An XML settings file is generated.
    _You can define the virtual hard disk size according to your needs._
    
 ``` bash
-VBoxManage createhd --filename /VirtualBox/$VM/$VM.vdi --size 32768
+VBoxManage createhd --filename $HOME/VirtualBox/$VM/$VM.vdi --size 32768
 ```
 
 ### 5. Create storage devices for the VM.
@@ -87,7 +87,7 @@ VBoxManage storageattach "$VM" \
 
 **add path to ISO image.**
 ``` Bash
-ISO=<PATH .iso>
+ISO="PATH .iso"
 ```
 
 **Attach the .iso to the virtuak DVD drive.**
@@ -105,7 +105,7 @@ VBoxManage storageattach "$VM" \
 
 **Change the graphics controller**
 ``` Bash
-VBoxManage modifyvm "$VM" --graphicscontroller vmsvga
+VBoxManage modifyvm $VM --graphicscontroller vmsvga
 ```
 
 ### Optional Configuration
@@ -127,24 +127,24 @@ _You can define the virtual RAM (memory) and video ram (vram) size according to 
 
 The VM starts in headless mode, which means that it does not have a GUI.
 ``` Bash
-VBoxManage startvm $VM --type headless
+VBoxManage startvm $VM --type gui
 ```
 
 ### General Instruction
 
 **Show specific information on the VM.**
 ``` Bash
-VBoxManage showvminfo "$VM" | grep -E "Memory size|Number of CPUs|CPU exec cap|Firmware|Graphic|Boot Device|State|Pointing Device|OHCI USB|EHCI USB|xHCI USB"
+VBoxManage showvminfo $VM | grep -E "Memory size|Number of CPUs|CPU exec cap|Firmware|Graphic|Boot Device|State|Pointing Device|OHCI USB|EHCI USB|xHCI USB"
 ```
 
-**Allow control from keyboard from the VM.**
+**Use a virtual USB keyboard and USB tablet if guest input is unreliable**
 ``` Bash
-VBoxManage modifyvm "$VM" --usb-xhci on --keyboard usb --mouse usbtablet
+VBoxManage modifyvm $VM --usb-xhci on --keyboard usb --mouse usbtablet
 ```
 
-**You can also start the vm with a GUI.**
+**You can also start the vm headless (no GUI).**
 ``` Bash
-VBoxManage startvm "$VM" --type gui
+VBoxManage startvm $VM --type headless
 ```
 
 **List all registered VM on the hardware.**
@@ -154,5 +154,5 @@ VBoxManage list vms
 
 **To delete both the VM registration and its virtual disk/configuration files.**
 ``` Bash
-VBoxManage unregistervm "$VM" --delete
+VBoxManage unregistervm $VM --delete
 ```
