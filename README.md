@@ -218,37 +218,37 @@ VBoxManage unregistervm "$VM" --delete
 
 ## Instruction Inside VM
 
+**Return the SELinux status.**
 ``` bash
 sestatus
 ``` 
--> return the SELinux status 
 
+**Add a new user with defaults setting.**
 ``` bash
 useradd -D <options> “login”
 ```
--> add a new user with defaults setting
 
+**Return the hostname.**
 ```bash
 hostname
 ```
--> return the hostname 
 
+**Change the hostname.**
 ```bash
 hostname “newhostname”
-```
--> change the hostname 
+``` 
 
+**MAN config sudo front end.**
 ``` bash
 man sudo.conf
 ```
--> man to config sudo front end
 
 ### SSH configuration
 
-For Rocky : if command not found process to the next bash.
 ``` Bash
 semanage port -l | grep ssh_port_t
 ```
+```Note : For Rocky - if the command is not found, process to Instal semanage packages.```
 
 **Instal semanage packages.**
 ``` Bash
@@ -259,5 +259,4 @@ dnf install -y policycoreutils-python-utils
 ``` Bash
 semanage port -a -t ssh_port_t -p tcp "add_new_port_number"
 ```
-
 ```note : verify that the tcp and NAT is configured on the VM```
