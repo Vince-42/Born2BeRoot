@@ -99,7 +99,7 @@ Create a VirtIO SCSI controller and attach the virtual hard disk. (This is requi
 ``` Bash
 VBoxManage storagectl "$VM" \
   --name "VirtIO SCSI" \
-  --add scsi \
+  --add virtio-scsi \
   --controller VirtIO \
   --portcount 2 \
   --bootable on
