@@ -199,6 +199,17 @@ VBoxManage controlvm "$VM" acpipowerbutton
 VBoxManage showvminfo "$VM" --log 0 | tail -n 80
 ```
 
+**Retrieve the VM signature ID.**
+```
+VM="vm_name"
+VDI="$HOME/VirtualBox VMs/$VM/$VM.vdi"
+
+VBoxManage showvminfo "$VM" | grep -i '^State'
+shasum "$VDI"
+```
+```shasum "$VDI" return the signature.```
+
+
 **To delete both the VM registration and its virtual disk/configuration files.**
 ``` Bash
 VBoxManage unregistervm "$VM" --delete
