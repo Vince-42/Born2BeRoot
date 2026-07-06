@@ -200,10 +200,11 @@ VBoxManage showvminfo "$VM" --log 0 | tail -n 80
 ```
 
 **Retrieve the VM signature ID.**
-```
+``` bash
 VM="vm_name"
 VDI="$HOME/VirtualBox VMs/$VM/$VM.vdi"
-
+```
+``` bash
 VBoxManage showvminfo "$VM" | grep -i '^State'
 shasum "$VDI"
 ```
