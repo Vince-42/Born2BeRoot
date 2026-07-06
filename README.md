@@ -10,11 +10,19 @@ Note : It does not apply to Intel Macs or x86/x86_64 guest operating systems.
 
 Oracle VirtualBox User Manual  : __https://download.virtualbox.org/virtualbox/7.2.12/UserManual.pdf__
 
+### Rocky Ressources
+
 Rocky Linux Source code  : __https://dl.rockylinux.org__
 
 Rocky Linux OS download : __https://rockylinux.org/sr-SP/download__
 
 Rocky firewalld docs   : __https://docs.rockylinux.org/10/de/guides/security/firewalld-beginners/__
+
+Rocky Permissions docs   : __https://docs.rockylinux.org/10/books/admin_guide/14-special-authority/__
+
+Rocky User Management   : __https://docs.rockylinux.org/10/books/admin_guide/06-users/__
+
+### Debian Ressources
 
 Debian OS (Minimal)      : __https://cdimage.debian.org/debian-cd/current/arm64/iso-cd/__
 
@@ -96,6 +104,7 @@ VBoxManage storagectl "$VM" \
   --portcount 2 \
   --bootable on
 ```
+```Note: the 'scsi' controller depends on which OS you are running, you might have to update it according to your OS.```
 
 ``` Bash
 VBoxManage storageattach "$VM" \
