@@ -22,6 +22,12 @@ Rocky Permissions docs   : __https://docs.rockylinux.org/10/books/admin_guide/14
 
 Rocky User Management   : __https://docs.rockylinux.org/10/books/admin_guide/06-users/__
 
+Password Config Management
+
+__https://www.server-world.info/en/note?os=Rocky_Linux_10&p=pam&f=1__
+
+__https://docs.rockylinux.org/10/guides/security/pam/__
+
 ### Debian Ressources
 
 Debian OS (Minimal)      : __https://cdimage.debian.org/debian-cd/current/arm64/iso-cd/__
@@ -261,3 +267,8 @@ dnf install -y policycoreutils-python-utils
 semanage port -a -t ssh_port_t -p tcp "add_new_port_number"
 ```
 ```note : verify that the tcp and NAT is configured on the VM```
+
+
+### Password configuration
+
+
