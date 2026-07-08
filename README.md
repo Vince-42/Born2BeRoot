@@ -22,11 +22,9 @@ Rocky Permissions docs   : __https://docs.rockylinux.org/10/books/admin_guide/14
 
 Rocky User Management   : __https://docs.rockylinux.org/10/books/admin_guide/06-users/__
 
-Password Config Management
+Password Config Management : __https://www.server-world.info/en/note?os=Rocky_Linux_10&p=pam&f=1__
 
-__https://www.server-world.info/en/note?os=Rocky_Linux_10&p=pam&f=1__
-
-__https://docs.rockylinux.org/10/guides/security/pam/__
+PAM authentication modules : __https://docs.rockylinux.org/10/guides/security/pam/__
 
 ### Debian Ressources
 
