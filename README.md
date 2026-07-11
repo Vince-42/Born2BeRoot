@@ -1,4 +1,4 @@
-# Born2BeRoot
+# Helper to create Virtual Machine on MacOs
 
 ## Creating an ARM64 virtual machine with VirtualBox on an Apple Silicon Mac
 
