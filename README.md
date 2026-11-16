@@ -267,6 +267,212 @@ semanage port -a -t ssh_port_t -p tcp "add_new_port_number"
 ```note : verify that the tcp and NAT is configured on the VM```
 
 
+
+# Born2beRoot — Defense Cheatsheet (Rocky Linux)
+
+## 1. Operating System & SELinux
+
+```bash
+cat /etc/os-release
+uname -a
+hostnamectl
+getenforce
+sestatus
+systemctl is-enabled firewalld
+systemctl is-active firewalld
+```
+
+## 2. Disk Partitions, Encryption & LVM
+
+```bash
+lsblk
+lsblk -f
+sudo fdisk -l
+df -h
+sudo pvs
+sudo vgs
+sudo lvs
+sudo lvdisplay
+sudo cryptsetup status /dev/mapper/luks-<UUID>
+sudo blkid
+```
+
+## 3. SSH — Port 4242
+
+```bash
+sudo systemctl status sshd
+sudo systemctl is-enabled sshd
+sudo sshd -T | grep '^port '
+sudo sshd -T | grep '^permitrootlogin'
+sudo ss -tlnp | grep ':4242'
+sudo semanage port -l | grep ssh_port_t
+sudo cat /etc/ssh/sshd_config.d/*.conf
+sudo sshd -t
+```
+
+## 4. Firewall — firewalld
+
+```bash
+sudo firewall-cmd --state
+sudo firewall-cmd --list-all
+sudo firewall-cmd --list-ports
+sudo firewall-cmd --list-services
+sudo firewall-cmd --permanent --list-all
+sudo firewall-cmd --permanent --add-port=4242/tcp
+sudo firewall-cmd --permanent --remove-port=4242/tcp
+sudo firewall-cmd --reload
+```
+
+## 5. Hostname
+
+```bash
+hostname
+hostnamectl
+sudo hostnamectl set-hostname newlogin42
+sudo hostnamectl set-hostname vleroy42
+cat /etc/hostname
+sudo vi /etc/hosts
+```
+
+## 6. Users & Groups
+
+```bash
+whoami
+id
+id vleroy42
+groups vleroy42
+getent passwd
+getent group
+getent group sudo
+getent group user42
+getent group wheel
+
+sudo adduser testuser42
+sudo passwd testuser42
+sudo groupadd -f user42
+sudo groupadd -f sudo
+sudo usermod -aG user42,sudo testuser42
+groups testuser42
+id testuser42
+sudo userdel -r testuser42
+```
+
+## 7. Sudo Privileges & Configuration
+
+```bash
+sudo -l
+sudo -l -U vleroy42
+sudo visudo -c
+sudo visudo -f /etc/sudoers.d/sudo_config
+sudo visudo -f /etc/sudoers.d/sudo-group
+sudo cat /etc/sudoers.d/sudo_config
+sudo cat /etc/sudoers.d/sudo-group
+sudo ls -l /etc/sudoers.d/
+sudo ls -l /var/log/sudo/
+sudo grep 'COMMAND=' /var/log/sudo/sudo.log
+sudo grep -c 'COMMAND=' /var/log/sudo/sudo.log
+sudo sudoreplay -l
+```
+
+## 8. Password Policy & Expiration
+
+```bash
+grep -E '^PASS_(MAX_DAYS|MIN_DAYS|WARN_AGE)' /etc/login.defs
+sudo cat /etc/security/pwquality.conf
+grep pam_pwquality.so /etc/pam.d/system-auth /etc/pam.d/password-auth
+sudo chage -l root
+sudo chage -l vleroy42
+
+sudo chage -M 30 -m 2 -W 7 testuser42
+sudo chage -l testuser42
+sudo passwd testuser42
+sudo passwd root
+sudo passwd vleroy42
+```
+
+## 9. Monitoring Script
+
+```bash
+ls -l /home/vleroy42/monitoring.sh
+cat /home/vleroy42/monitoring.sh
+bash -n /home/vleroy42/monitoring.sh
+sudo bash /home/vleroy42/monitoring.sh
+```
+
+## 10. Monitoring — Individual Metrics
+
+```bash
+uname -a
+grep 'physical id' /proc/cpuinfo | sort -u | wc -l
+grep -c '^processor' /proc/cpuinfo
+free -m
+df -h
+top -bn1
+who -b
+uptime -s
+lsblk
+sudo lvs
+ss -ta
+who
+hostname -I
+ip -4 addr show
+ip link show
+sudo grep -c 'COMMAND=' /var/log/sudo/sudo.log
+```
+
+## 11. Cron — Schedule & Execution
+
+```bash
+systemctl is-active crond
+systemctl is-enabled crond
+sudo crontab -l
+sudo crontab -e
+sudo journalctl -u crond -b --no-pager
+sudo grep CROND /var/log/cron
+```
+
+Expected crontab:
+
+```cron
+*/10 * * * * /bin/bash /home/vleroy42/monitoring.sh
+@reboot /bin/sleep 30 && /bin/bash /home/vleroy42/monitoring.sh
+```
+
+## 12. Stop / Resume Monitoring Without Editing the Script
+
+```bash
+sudo crontab -e
+sudo crontab -l
+```
+
+Comment out the monitoring entries temporarily with `#`, then remove `#` to resume.
+
+## 13. SSH Connection From Host
+
+```bash
+ssh -p 2222 vleroy42@127.0.0.1
+scp -P 2222 monitoring.sh vleroy42@127.0.0.1:~/
+```
+
+Host port 2222 forwards to VM port 4242.
+
+## 14. Useful Final Checks
+
+```bash
+sudo visudo -c
+getenforce
+sudo firewall-cmd --list-all
+sudo sshd -T | grep -E '^(port|permitrootlogin)'
+sudo ss -tlnp | grep ':4242'
+sudo chage -l root
+sudo chage -l vleroy42
+groups vleroy42
+sudo crontab -l
+sudo bash /home/vleroy42/monitoring.sh
+```
+
+
+
 ### Password configuration
 
 
