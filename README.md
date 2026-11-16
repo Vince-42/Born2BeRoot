@@ -472,7 +472,22 @@ sudo bash /home/vleroy42/monitoring.sh
 ```
 
 
-
-### Password configuration
+lsblk                         # partition layout
+sudo aa-status                # AppArmor status
+sudo ufw status               # firewall rules
+sudo ufw status verbose       #display data to port on actif ufw
+sudo ss -tunlp                # listening ports (sshd on 4242)
+chage -l mabrugge             # password aging
+sudo chage -M 30 -m 2 -W 7    # necessary for change date for old user
+groups mabrugge               # group membership
+sudo crontab -l               # scheduled monitoring
+sudo journalctl -u cron -f    #check the execution of the script
+sudo groupadd user42          #create group
+sudo usermod -aG sudo,user42 login #add user to group
+sudo adduser login                   #create user
+sudo visudo                          #display data for sudo
+sudo /usr/local/bin/monitoring.sh    #execute the script
+sudo nano /etc/security/pwquality.conf #check complexity of the password
+sudo hostnamectl set-hostname tonlogin42 # change hostname
 
 
